@@ -1,0 +1,26 @@
+.env
+node_modules
+package-lock.json
+testingCode.js
+INTERVIEW_PREP.md
+
+# Output files
+output/
+*.mp3
+*.wav
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

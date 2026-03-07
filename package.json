@@ -1,0 +1,20 @@
+{
+  "name": "voice-demo",
+  "version": "1.0.0",
+  "description": "ElevenLabs API Demo - Technical Customer Support Specialist Interview",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@elevenlabs/elevenlabs-js": "^2.36.0",
+    "dotenv": "^17.3.1",
+    "inquirer": "^13.3.0",
+    "node-fetch": "^3.3.2",
+    "play-sound": "^1.1.6"
+  }
+}
