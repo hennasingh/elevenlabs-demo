@@ -14,7 +14,7 @@ export async function showMenu() {
             },
             {
                 name: "Handling long Text Inputs",
-                vale: "longtext"
+                value: "longtext"
             },
             {
                 name: "Text To Speech",

@@ -3,4 +3,4 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-export const elevenlabs = new ElevenLabsClient();
+export const eleven = new ElevenLabsClient();
