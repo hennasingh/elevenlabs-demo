@@ -15,3 +15,25 @@ export async function chooseVoice(voices) {
         }))
     });
 }
+
+export async function chooseCloneSource() {
+    return await select ( {
+        message: 'Choose an audio source for cloning',
+        choices: [
+            {
+                name: "Use sample audio within this project",
+                value: "sample"
+            },
+            {
+                name: 'Provide custom audio path',
+                value: 'custom'
+            }
+        ]
+    });
+}
+
+export async function askAudioPath() {
+    return await input({
+        message: 'Enter path to audio file'
+    });
+}

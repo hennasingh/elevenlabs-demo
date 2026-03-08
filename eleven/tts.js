@@ -31,7 +31,7 @@ export async function runTTS() {
 
     const audioBuffer = Buffer.concat(chunks);
 
-    const outputPath = path.resolve(process.cwd(), 'output', 'tts.mp3');
+    const outputPath = path.resolve('output/tts.mp3');
 
     saveAudio(audioBuffer, outputPath);
     console.log(`Audio saved to ${outputPath}`);

@@ -3,6 +3,7 @@ node_modules
 package-lock.json
 testingCode.js
 INTERVIEW_PREP.md
+botConvo.md
 
 # Output files
 output/
