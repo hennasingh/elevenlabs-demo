@@ -19,12 +19,32 @@ The TTS snippet works fine after buffering the audio chunks.
 
 #### Some Improvements
 1. Slicing the voice options to 5-10 from 10.
-2. Filtering the voices based on presets. 
+2. Filtering the high quality voices 
 
 ```
 const voices = response.voices
-  .filter(v => v.category === "premade")
+  .filter(v => v.category === "high_quality")
   .slice(0,5)
 ```
 
 ### Streaming Audio Response
+
+Used getAll() API to fetch the voices but I wanted to try category filtering as explained in the docs here https://elevenlabs.io/docs/api-reference/voices/search but it didn't work as expected.
+```
+Voices fetched: 21
+[
+  'premade', 'premade', 'premade',
+  'premade', 'premade', 'premade',
+  'premade', 'premade', 'premade',
+  'premade', 'premade', 'premade',
+  'premade', 'premade', 'premade',
+  'premade', 'premade', 'premade',
+  'premade', 'premade', 'premade'
+]
+```
+
+The v2 search API returned 10 voices and all premade category as well. Since I used getAll() in TTS, I decided to use v2 search for streaming.
+
+#### Saving and Playing the audio response
+
+At this moment, there is no difference the way the audio is saved and played for TTS and Streaming. I will explore the streaming approach, where audio plays as it is typed.
