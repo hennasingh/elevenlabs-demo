@@ -46,10 +46,12 @@ The voices can be filtered by category. As per the docs, there should be 4 categ
 
 The basic text to speech uses `textToSpeech.convert()` method of the SDK to generate the audio. The output is then saved in the output folder and played automatically.
 
-This is legacy v1 "List voices" endpoint. v1 is still there but Eleven recommends using the v2 endpoint, which I have implemented in the `streaming.js` file. v2 handles pagination well and has advanced filtering available.
+This is legacy v1 "List voices" endpoint. v1 is still there but Eleven recommends using the v2 "search" endpoint, which I have implemented in the `streaming.js` file. v2 handles pagination well and has advanced filtering available.
 
 
 ### Streaming Audio Generation
+
+I have used [`search()`](https://elevenlabs.io/docs/api-reference/voices/search) method call for getting all available voices. There are 10 voices returned. The app gives you a choice to select one of the voices. Then it will ask you to enter a text to speak. 
 
 Streaming Audio generation uses `textToSpeech.stream()` API to generate the audio. The main difference between `stream()` and `convert()` is how the data is delivered to the application.
 
@@ -83,6 +85,17 @@ I have added [voice_settings](https://elevenlabs.io/docs/api-reference/voices/se
 
 ### Long Text Inputs
 
+This has been a tricky implementation. The app provides two options for long text:
+
+1. Manual Chunking: The text is split into sentence-based chunks (default max ~500 chars) and each chunk is sent to `textToSpeech.convert()`. The audio chunks are written sequentially to a single output file, so you still get one continuous MP3. As there is no error handling, this may fail if character limit is exceeded.
+
+2. Long text as is: I used turbo model to convert the full text in one go. This is simpler (no manual chunking) but still subject to model limits.
+
+In both cases the audio is saved to `output/longtext.mp3` and played automatically.
+
+Elevenlabs provides [request multiple stitching](https://elevenlabs.io/docs/eleven-api/guides/cookbooks/text-to-speech/request-stitching)feature specially for this case. 
+
+When the text is split into pieces and sent as separate requests, the AI usually treats each one as a brand new start, which can sometimes make the prosody or "flow" sound a bit jumpy between chunks. So a request_id is passed to maintain continuity of the audio. 
 
 ## Improvements
 
