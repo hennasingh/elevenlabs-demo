@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import { eleven } from "./client.js";
 import { askText, chooseCloneSource, askAudioPath } from "../utils/input.js";
-import { saveAudio, playAudio } from "../utils/audio.js";
+import { playAudio } from "../utils/audio.js";
 
 export async function runCloneWorkflow() {
   console.log("\nVoice cloning workflow\n");

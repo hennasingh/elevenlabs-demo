@@ -9,15 +9,6 @@ async function writeAudioToStream(audio, writeStream) {
     writeStream.write(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
   }
 }
-
-function finishWriteStream(writeStream) {
-  return new Promise((resolve, reject) => {
-    writeStream.on("finish", resolve);
-    writeStream.on("error", reject);
-    writeStream.end();
-  });
-}
-
 /**
  * 
  *  The client side chunking to stay within the per *request text limits
@@ -51,7 +42,7 @@ export async function runLongText() {
   console.log("\nLong text processing.. \n");
 
   try {
-    
+
     const strategy = await chooseLongTextStrategy();
 
     const response = await eleven.voices.search();
@@ -63,7 +54,11 @@ export async function runLongText() {
     const outputPath = path.resolve('output/longtext.mp3');
     const writeStream = fs.createWriteStream(outputPath);
 
-    if(strategy == 'chunk') {
+    writeStream.on('error', (err) => {
+      console.error("Error writing to file:", err.message);
+    });
+
+    if (strategy == 'chunk') {
       console.log('\nChunking text...\n');
 
       const chunks = splitTextIntoChunks(text);
@@ -78,9 +73,8 @@ export async function runLongText() {
           modelId: 'eleven_multilingual_v2'
         });
 
-        await writeAudioToStream(audio, writeStream);
-        
         index++;
+        await writeAudioToStream(audio, writeStream);
       }
     } else {
       console.log('\n Using long-form generation..\n');
@@ -94,11 +88,10 @@ export async function runLongText() {
       await writeAudioToStream(audio, writeStream);
     }
 
-    await finishWriteStream(writeStream);
-
-    console.log('\nAudio saved to ' + outputPath + '\n');
-
-    playAudio(outputPath);
+    writeStream.end(() => {
+      console.log(`\nAudio saved to ${outputPath}\n`);
+      playAudio(outputPath);
+    });
 
   } catch (error) {
     console.error("Error in long text processing:", error.message);

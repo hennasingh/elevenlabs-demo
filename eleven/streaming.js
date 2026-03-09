@@ -37,6 +37,7 @@ export async function runStreaming() {
       chunkCount++;
       process.stdout.write(`Receiving audio chunk ${chunkCount} ...\r`);
     }
+    
     writeStream.end();
     console.log(`\nStreaming complete. Saved to ${outputPath}`);
 
