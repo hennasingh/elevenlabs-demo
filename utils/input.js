@@ -37,3 +37,19 @@ export async function askAudioPath() {
         message: 'Enter path to audio file'
     });
 }
+
+export async function chooseLongTextStrategy() {
+    return await select({
+        message: 'Choose a strategy for handling long text',
+        choices: [
+            {
+                name: 'Chunk text automatically',
+                value: 'chunk'
+            },
+            {
+                name: 'Use Elevenlabs long-form endpoint',
+                value: 'longform'
+            }
+        ]
+    });
+}
