@@ -42,7 +42,7 @@ If you have a paid plan, you can test it by providing a voice sample audio file 
 
 For text to speech, I am using [getAll()](https://elevenlabs.io/docs/api-reference/legacy/voices/get-all) to get all the available voices. There are 21 voices available to choose. The app workflow will give you a choice  to use one of many voices. Then it will ask you to enter a text to speak. 
 
-The voices can be filtered by category. As per the docs, there should be 4 categories: `premade`, `high_quality`, `generated`, `official`. However, obly `premade` results are returned.
+The voices can be filtered by category. As per the docs, there should be 4 categories: `premade`, `high_quality`, `generated`, `official`. However, only `premade` results are returned.
 
 The basic text to speech uses `textToSpeech.convert()` method of the SDK to generate the audio. The output is then saved in the output folder and played automatically.
 
@@ -57,7 +57,7 @@ Streaming Audio generation uses `textToSpeech.stream()` API to generate the audi
 
 2. `eleven.textToSpeech.convert()` returns the audio only after the entire audio is generated. This is the 'high latency' way to do it as the code has to wait for the entire audio to be generated before it can start processing or playing the audio.
 
-> Please note that for the large amount of of text, the limits are the same for both stream and convert method because they use the same underline model. The character limit depends on the model used. **Multilingual v2** (the model in this demo): Up to 10,000 characters (roughly 10 minutes of audio). But on the free plan, like mine is capped at 2500 characters per request, regardless of the model.
+> Please note that for the large amount of text, the limits are the same for both stream and convert method because they use the same underlying model. The character limit depends on the model used. **Multilingual v2** (the model in this demo): Up to 10,000 characters (roughly 10 minutes of audio). But on the free plan, like mine is capped at 2500 characters per request, regardless of the model.
 
 #### Saving/Playing the Audio
 There are different ways to play the generated audio
@@ -80,6 +80,17 @@ I have implemented [Instant Voice Clone](https://elevenlabs.io/docs/eleven-api/g
 - or provide a path to a file on your local machine 
 
 I have added [voice_settings](https://elevenlabs.io/docs/api-reference/voices/settings/get) object in the convert method to improve the quality of the cloned voice. This is not tested yet.
+
+### Long Text Inputs
+
+
+## Improvements
+
+The app is a basic demo with limited error handling and testing.
+Elevenlabs has comprehensive documentation on both error handling and best practices.
+
+- [Best Practices for Text to Speech](https://elevenlabs.io/docs/overview/capabilities/text-to-speech/best-practices)
+- [Error Handling](https://elevenlabs.io/docs/eleven-api/resources/errors)
 
 
 

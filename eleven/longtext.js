@@ -79,7 +79,6 @@ export async function runLongText() {
     } else {
       console.log('\n Using long-form generation..\n');
 
-      //convert() behaves like async iterable chunks, so can be used with for await (const chunk of chunks)
       const audio = await eleven.textToSpeech.convert(voiceId, {
         text,
         modelId: 'eleven_turbo_v2_5'
